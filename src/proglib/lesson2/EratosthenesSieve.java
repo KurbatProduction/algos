@@ -4,7 +4,7 @@ public class EratosthenesSieve {
 
     public static void main(String[] args) {
         int n = 50;
-        System.out.println(getPrimeFactorList(50));
+        System.out.println(getPrimeFactorList(n));
     }
 
     public static String getPrimeFactorList(int n) {
