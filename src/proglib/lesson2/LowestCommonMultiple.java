@@ -72,6 +72,6 @@ public class LowestCommonMultiple {
             b = r;
         }
 
-        return a * (first / a) * (second / a);
+        return first * second / a;
     }
 }
