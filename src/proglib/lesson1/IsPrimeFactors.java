@@ -3,7 +3,7 @@ package proglib.lesson1;
 public class IsPrimeFactors {
 
     public static void main(String[] args) {
-        long number = 12345678901234969L;
+        long number = 12323;
         long start = System.currentTimeMillis();
         boolean result = naive(number);
         long workTime = System.currentTimeMillis() - start;
