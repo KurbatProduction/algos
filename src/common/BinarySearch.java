@@ -1,9 +1,9 @@
-package BinarySearch;
+package common;
 
-public class Main {
+public class BinarySearch {
 
     public static void main(String[] args) {
-        System.out.println(binarySearch(new int[] {0, 2, 3, 4, 5, 6}, 1));
+        System.out.println(binarySearch(new int[] {0, 2, 3, 4, 5, 6}, 2));
     }
 
     public static int binarySearch(int[] nums, int key) {
@@ -11,7 +11,7 @@ public class Main {
         int right = nums.length - 1;
 
         while (left <= right) {
-            int mid = (left + right) / 2;
+            int mid = left + (right - left) / 2;
             int midVal = nums[mid];
 
             if (key > midVal)

@@ -1,6 +1,6 @@
-package Polindrom;
+package common;
 
-public class StringChecking {
+public class PalindromeChecking {
 
     public static void main(String[] args) {
         String[] strings = {
