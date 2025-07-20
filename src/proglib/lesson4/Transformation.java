@@ -21,14 +21,9 @@ public class Transformation {
 
     public static int findMinSize(int[] a) {
         Map<Integer, Integer> map = new HashMap<>();
-
         for (int num : a) map.put(num, map.getOrDefault(num, 0) + 1);
 
-        int maxFrequency = 0;
-        for (int count : map.values())
-            if (count > maxFrequency) {
-                maxFrequency = count;
-            }
+        int maxFrequency = map.values().stream().mapToInt(Integer::intValue).max().orElse(0);
 
         if (maxFrequency <= (a.length + 1) / 2) {
             return a.length % 2;
