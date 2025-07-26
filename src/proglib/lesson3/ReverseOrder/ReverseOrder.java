@@ -1,49 +1,49 @@
-package proglib.lesson1;
+package proglib.lesson3.ReverseOrder;
 
 import java.io.*;
 
-public class PrimeFactors {
+public class ReverseOrder {
 
     public static void main(String[] args) {
         BufferedReader reader = getReader();
-        int n = readInt(reader);
+        read(reader); //reading array length
+        int[] arr = parseIntArray(read(reader));
         closeReader(reader);
-//        long start = System.currentTimeMillis();
-        String primeFactors = getPrimeFactors(n);
-//        long time = System.currentTimeMillis() - start;
+
+        String output = reverse(arr);
+
         BufferedWriter writer = getWriter();
-        write(writer, primeFactors);
-//        write(writer, "\n" + time + " ms");
+        write(writer, output);
         closeWriter(writer);
     }
 
-    public static String getPrimeFactors(int n) {
+    public static String reverse(int[] arr) {
+        for (int i = 0; i < arr.length / 2; i++) {
+            int temp = arr[i];
+            arr[i] = arr[arr.length - 1 - i];
+            arr[arr.length - 1 - i] = temp;
+        }
         StringBuilder result = new StringBuilder();
-        while (n % 2 == 0) {
-            result.append(2 + " ");
-            n /= 2;
-        }
-        for (int i = 3; i < n; i += 2) {
-            while (n % i == 0) {
-                result.append(i).append(" ");
-                n /= i;
-            }
-        }
-
-        if (n > 2) {
-            result.append(n);
-        }
-
+        for (int a : arr) result.append(a).append(" ");
         return result.toString().trim();
+    }
+
+    public static int[] parseIntArray(String str) {
+        String[] strArray = str.split(" ");
+        int[] intArray = new int[strArray.length];
+        for (int i = 0; i < intArray.length; i++) {
+            intArray[i] = Integer.parseInt(strArray[i]);
+        }
+        return intArray;
     }
 
     public static BufferedReader getReader() {
         return new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public static int readInt(BufferedReader reader) {
+    public static String read(BufferedReader reader) {
         try {
-            return Integer.parseInt(reader.readLine());
+            return reader.readLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

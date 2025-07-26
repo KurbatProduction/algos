@@ -1,37 +1,49 @@
-package proglib.lesson2;
+package proglib.lesson1.PrimeFactors;
 
 import java.io.*;
 
-public class NumberSystem {
+public class PrimeFactors {
 
     public static void main(String[] args) {
         BufferedReader reader = getReader();
-        String num = read(reader);
+        int n = readInt(reader);
         closeReader(reader);
-
-        int fractionsSum = parseToDecimal(num);
-
+//        long start = System.currentTimeMillis();
+        String primeFactors = getPrimeFactors(n);
+//        long time = System.currentTimeMillis() - start;
         BufferedWriter writer = getWriter();
-        write(writer, String.valueOf(fractionsSum));
+        write(writer, primeFactors);
+//        write(writer, "\n" + time + " ms");
         closeWriter(writer);
     }
 
-    public static int parseToDecimal(String str) {
-        int base = str.chars().map(c -> c - '0').max().orElse(0) + 1;
-        int result = 0;
-        for (int i = 0; i < str.length(); i++) {
-            result = result * base + (str.charAt(i) - '0');
+    public static String getPrimeFactors(int n) {
+        StringBuilder result = new StringBuilder();
+        while (n % 2 == 0) {
+            result.append(2 + " ");
+            n /= 2;
         }
-        return result;
+        for (int i = 3; i < n; i += 2) {
+            while (n % i == 0) {
+                result.append(i).append(" ");
+                n /= i;
+            }
+        }
+
+        if (n > 2) {
+            result.append(n);
+        }
+
+        return result.toString().trim();
     }
 
     public static BufferedReader getReader() {
         return new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public static String read(BufferedReader reader) {
+    public static int readInt(BufferedReader reader) {
         try {
-            return reader.readLine();
+            return Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

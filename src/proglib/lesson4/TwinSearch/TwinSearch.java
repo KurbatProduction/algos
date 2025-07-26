@@ -1,4 +1,4 @@
-package proglib.lesson4;
+package proglib.lesson4.TwinSearch;
 
 import java.io.*;
 

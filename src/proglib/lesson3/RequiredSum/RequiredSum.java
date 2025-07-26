@@ -1,35 +1,57 @@
-package proglib.lesson4;
+package proglib.lesson3.RequiredSum;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Transformation {
+public class RequiredSum {
 
     public static void main(String[] args) {
         BufferedReader reader = getReader();
-        read(reader); // reading a length
+        read(reader); //reading array1 length
         int[] a = parseIntArray(read(reader));
+        read(reader); //reading array2 length
+        int[] b = parseIntArray(read(reader));
+        int k = Integer.parseInt(read(reader));
         closeReader(reader);
 
-        int output = findMinSize(a);
+        int output = countAlgo1(a, b, k);
 
         BufferedWriter writer = getWriter();
         write(writer, String.valueOf(output));
         closeWriter(writer);
     }
 
-    public static int findMinSize(int[] a) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int num : a) map.put(num, map.getOrDefault(num, 0) + 1);
-
-        int maxFrequency = map.values().stream().mapToInt(Integer::intValue).max().orElse(0);
-
-        if (maxFrequency <= (a.length + 1) / 2) {
-            return a.length % 2;
-        } else {
-            return 2 * maxFrequency - a.length;
+    public static int countNaive(int[] a, int[] b, int k) {
+        int count = 0;
+        Set<Integer> bSet = new HashSet<>();
+        for (int bValue: b) bSet.add(bValue);
+        for (int aValue: a) {
+            if (bSet.contains(k - aValue)) count++;
         }
+        return count;
+    }
+
+    public static int countAlgo1(int[] a, int[] b, int k) {
+
+        int i = 0;
+        int j = b.length - 1;
+        int count = 0;
+
+        while (i < a.length && j >= 0) {
+            int sum = a[i] + b[j];
+            if (sum == k) {
+                count++;
+                i++;
+                j--;
+            } else if (sum < k) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        return count;
     }
 
     public static int[] parseIntArray(String str) {

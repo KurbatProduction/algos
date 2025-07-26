@@ -1,40 +1,28 @@
-package proglib.lesson3;
+package proglib.lesson2.NumberSystem;
 
 import java.io.*;
 
-public class ReverseOrder {
+public class NumberSystem {
 
     public static void main(String[] args) {
         BufferedReader reader = getReader();
-        read(reader); //reading array length
-        int[] arr = parseIntArray(read(reader));
+        String num = read(reader);
         closeReader(reader);
 
-        String output = reverse(arr);
+        int fractionsSum = parseToDecimal(num);
 
         BufferedWriter writer = getWriter();
-        write(writer, output);
+        write(writer, String.valueOf(fractionsSum));
         closeWriter(writer);
     }
 
-    public static String reverse(int[] arr) {
-        for (int i = 0; i < arr.length / 2; i++) {
-            int temp = arr[i];
-            arr[i] = arr[arr.length - 1 - i];
-            arr[arr.length - 1 - i] = temp;
+    public static int parseToDecimal(String str) {
+        int base = str.chars().map(c -> c - '0').max().orElse(0) + 1;
+        int result = 0;
+        for (int i = 0; i < str.length(); i++) {
+            result = result * base + (str.charAt(i) - '0');
         }
-        StringBuilder result = new StringBuilder();
-        for (int a : arr) result.append(a).append(" ");
-        return result.toString().trim();
-    }
-
-    public static int[] parseIntArray(String str) {
-        String[] strArray = str.split(" ");
-        int[] intArray = new int[strArray.length];
-        for (int i = 0; i < intArray.length; i++) {
-            intArray[i] = Integer.parseInt(strArray[i]);
-        }
-        return intArray;
+        return result;
     }
 
     public static BufferedReader getReader() {

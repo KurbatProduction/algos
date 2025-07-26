@@ -1,4 +1,4 @@
-package proglib.lesson1;
+package proglib.lesson1.FactorialNulls;
 
 import java.io.*;
 

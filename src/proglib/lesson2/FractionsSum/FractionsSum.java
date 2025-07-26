@@ -1,4 +1,4 @@
-package proglib.lesson2;
+package proglib.lesson2.FractionsSum;
 
 import java.io.*;
 

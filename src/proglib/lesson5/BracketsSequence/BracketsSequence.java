@@ -1,4 +1,4 @@
-package proglib.lesson5;
+package proglib.lesson5.BracketsSequence;
 
 import java.io.*;
 import java.util.ArrayDeque;
